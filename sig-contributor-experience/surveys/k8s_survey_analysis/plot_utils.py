@@ -152,14 +152,13 @@ def get_data_subset(
     else:
         cols = og_cols
 
-    if exclude_new_contributors:
-        topic_data = survey_data[
+    return (
+        survey_data[
             survey_data["Contributing_Length"] != "less than one year"
         ][cols]
-    else:
-        topic_data = survey_data[cols]
-
-    return topic_data
+        if exclude_new_contributors
+        else survey_data[cols]
+    )
 
 
 def get_multi_year_data_subset(
@@ -557,10 +556,7 @@ def make_bar_chart(survey_data, topic, facet_by=[], proportional=False):
     Returns:
         (plotnine.ggplot): Plot object which can be displayed in a notebook or saved out to a file
     """
-    show_legend = False
-    if facet_by:
-        show_legend = True
-
+    show_legend = bool(facet_by)
     topic_data_long = get_single_year_data_subset(survey_data, topic, facet_by)
 
     x = topic_data_long.columns.tolist()
@@ -617,7 +613,9 @@ def make_bar_chart(survey_data, topic, facet_by=[], proportional=False):
             facet_by.append(".")
 
     br = (
-        p9.ggplot(aggregate_data, p9.aes(x="level_0", fill="level_0", y="rating"))
+        p9.ggplot(
+            aggregate_data, p9.aes(x="level_0", fill="level_0", y="rating")
+        )
         + p9.geom_bar(show_legend=show_legend, stat="identity")
         + p9.theme(
             axis_text_x=p9.element_text(angle=45, ha="right"),
@@ -627,7 +625,9 @@ def make_bar_chart(survey_data, topic, facet_by=[], proportional=False):
             limits=topic_data_long["level_0"].unique().tolist(),
             labels=[
                 "\n".join(
-                    textwrap.wrap(x.replace(topic, "").replace("_", " "), width=35)[0:2]
+                    textwrap.wrap(
+                        x.replace(topic, "").replace("_", " "), width=35
+                    )[:2]
                 )
                 for x in topic_data_long["level_0"].unique().tolist()
             ],
@@ -780,7 +780,9 @@ def make_likert_chart(
             limits=x_sort_order,
             labels=[
                 "\n".join(
-                    textwrap.wrap(x.replace(topic, "").replace("_", " "), width=35)[0:2]
+                    textwrap.wrap(
+                        x.replace(topic, "").replace("_", " "), width=35
+                    )[:2]
                 )
                 for x in x_sort_order
             ],

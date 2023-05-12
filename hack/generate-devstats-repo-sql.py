@@ -138,7 +138,7 @@ def repos_from_k8s_group(k8s_group):
             path_parts = owners_path.split('/')
             # org/repo is owned by k8s_group if org/repo/OWNERS os in one of their subprojects
             if path_parts[2] == 'OWNERS':
-                repo = '/'.join(path_parts[0:2])
+                repo = '/'.join(path_parts[:2])
                 repos[repo] = True
     return sorted(repos.keys())
 
@@ -148,14 +148,15 @@ def k8s_group_name(k8s_group):
         return "SIG " + k8s_group['name']
     if group_dir.startswith('committee-'):
         return k8s_group['name'] + " Committee"
-    return "UNKNOWN " + group_dir
+    return f"UNKNOWN {group_dir}"
 
 def write_repo_groups_template(name, repos, fp):
     if len(repos):
         fp.write(
             repo_group_sql_template.format(
-                name,
-                ',\n'.join(['  \'{}\''.format(r) for r in repos])))
+                name, ',\n'.join([f"  \'{r}\'" for r in repos])
+            )
+        )
 
 def write_repo_groups_sql(k8s_groups, fp):
     fp.write(repo_groups_sql_header)
