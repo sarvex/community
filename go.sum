@@ -161,3 +161,5 @@ gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
 gopkg.in/yaml.v3 v3.0.1/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
 k8s.io/enhancements v0.0.0-20230113204613-7f681415a001 h1:WIc9tKwNWdlFwmEMzK8rX5DVpxmKQPo8LA0yyKroxxs=
 k8s.io/enhancements v0.0.0-20230113204613-7f681415a001/go.mod h1:VTK7nLkF9+GUWaHX08TT7CYf8tZSY8rChiH8GFwPYy8=
+k8s.io/enhancements v0.0.0-20230830151848-fafaf8e28078 h1:HV51cDnzVk67wIsnwrE0duwuT+P1WShhiNztNAg1hKI=
+k8s.io/enhancements v0.0.0-20230830151848-fafaf8e28078/go.mod h1:VTK7nLkF9+GUWaHX08TT7CYf8tZSY8rChiH8GFwPYy8=
