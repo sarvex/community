@@ -9,7 +9,7 @@ require (
 	github.com/google/go-github/v54 v54.0.0
 	golang.org/x/mod v0.12.0
 	gopkg.in/yaml.v3 v3.0.1
-	k8s.io/enhancements v0.0.0-20230830151848-fafaf8e28078
+	k8s.io/enhancements v0.0.0-20240425174930-3feb698013b4
 )
 
 require (
